@@ -8,8 +8,8 @@ import {
 } from './helpers';
 
 const vstarAbilities = [
-  ['スターアルケミー', 'card/42184/regu/XY'],
-  ['スターバース', 'card/42388/regu/XY'],
+  ['特性：スターアルケミー', 'card/42184/regu/XY'],
+  ['特性：スターバース', 'card/42388/regu/XY'],
 ];
 
 const theme: Theme = {

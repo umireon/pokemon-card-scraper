@@ -8,12 +8,12 @@ import {
 } from './helpers';
 
 const abilities = [
-  ['かくしふだ', 'card/41212/regu/XY'],
-  ['きょくていおん', 'card/43234/regu/XY'],
-  ['しっこくのわざわい', 'card/43164/regu/XY'],
-  ['ねっけつレッスン', 'card/42283/regu/XY'],
-  ['ルミナスサイン', 'card/42794/regu/XY'],
-  ['わななくれいき', 'card/43235/regu/XY'],
+  ['特性：かくしふだ', 'card/41212/regu/XY'],
+  ['特性：きょくていおん', 'card/43234/regu/XY'],
+  ['特性：しっこくのわざわい', 'card/43164/regu/XY'],
+  ['特性：ねっけつレッスン', 'card/42283/regu/XY'],
+  ['特性：ルミナスサイン', 'card/42794/regu/XY'],
+  ['特性：わななくれいき', 'card/43235/regu/XY'],
 ];
 
 const theme: Theme = {
