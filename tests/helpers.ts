@@ -24,9 +24,10 @@ export interface Theme {
 
 export interface RenderNameDescOptions {
   readonly theme: Theme
+  readonly prefix?: string
 }
 
-export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNameDescOptions) {
+export function renderFirstNameDesc(headerElem: HTMLElement, { theme, prefix }: RenderNameDescOptions) {
   const { parentNode } = headerElem
   if (!parentNode) throw new Error();
 
@@ -37,6 +38,9 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
 
   const nameElem = headerElem.nextElementSibling;
   if (!nameElem || !(nameElem instanceof HTMLElement)) throw new Error();
+  if (prefix) {
+    nameElem.textContent = prefix + nameElem.textContent;
+  }
   nameElem.style.marginTop = '0';
   nameElem.style.color = theme.color;
   const descElem = nameElem.nextElementSibling;

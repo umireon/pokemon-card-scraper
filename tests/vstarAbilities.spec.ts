@@ -8,8 +8,8 @@ import {
 } from './helpers';
 
 const vstarAbilities = [
-  ['特性：スターアルケミー', 'card/42184/regu/XY'],
-  ['特性：スターバース', 'card/42388/regu/XY'],
+  ['スターアルケミー', 'card/42184/regu/XY'],
+  ['スターバース', 'card/42388/regu/XY'],
 ];
 
 const theme: Theme = {
@@ -30,7 +30,7 @@ test('VSTARパワーの特性取得', async ({ page }) => {
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h4[text()="特性"]');
-    await header.evaluate(renderFirstNameDesc, { theme });
+    await header.evaluate(renderFirstNameDesc, { theme, prefix: '特性：' });
     await page.locator('#subtitle').screenshot({ path: pathSubtitle, omitBackground: true });
     await page.locator('.RightBox-inner').evaluate(renderWithImage);
     await page.locator('#box').screenshot({ path: pathBox, omitBackground: true });

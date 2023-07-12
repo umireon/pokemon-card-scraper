@@ -8,12 +8,12 @@ import {
 } from './helpers';
 
 const abilities = [
-  ['特性：かくしふだ', 'card/41212/regu/XY'],
-  ['特性：きょくていおん', 'card/43234/regu/XY'],
-  ['特性：しっこくのわざわい', 'card/43164/regu/XY'],
-  ['特性：ねっけつレッスン', 'card/42283/regu/XY'],
-  ['特性：ルミナスサイン', 'card/42794/regu/XY'],
-  ['特性：わななくれいき', 'card/43235/regu/XY'],
+  ['かくしふだ', 'card/41212/regu/XY'],
+  ['きょくていおん', 'card/43234/regu/XY'],
+  ['しっこくのわざわい', 'card/43164/regu/XY'],
+  ['ねっけつレッスン', 'card/42283/regu/XY'],
+  ['ルミナスサイン', 'card/42794/regu/XY'],
+  ['わななくれいき', 'card/43235/regu/XY'],
 ];
 
 const theme: Theme = {
@@ -34,7 +34,7 @@ test('特性取得', async ({ page }) => {
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="特性"]');
-    await header.evaluate(renderFirstNameDesc, { theme });
+    await header.evaluate(renderFirstNameDesc, { theme, prefix: '特性：' });
     await page.locator('#subtitle').screenshot({ path: pathSubtitle, omitBackground: true });
     await page.locator('.RightBox-inner').evaluate(renderWithImage);
     await page.locator('#box').screenshot({ path: pathBox, omitBackground: true });
