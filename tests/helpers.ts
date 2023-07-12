@@ -12,18 +12,18 @@ export async function exists(path: string) {
 }
 
 export interface Theme {
-  color: string;
-  subtitleBackground: string;
-  subtitleBorder: string;
-  subtitlePadding: string;
-  nameInnerTextStroke: string;
-  nameOuterTextStroke: string;
-  descInnerTextStroke: string;
-  descOuterTextStroke: string;
+  readonly color: string;
+  readonly subtitleBackground: string;
+  readonly subtitleBorder: string;
+  readonly subtitlePadding: string;
+  readonly nameInnerTextStroke: string;
+  readonly nameOuterTextStroke: string;
+  readonly descInnerTextStroke: string;
+  readonly descOuterTextStroke: string;
 }
 
 export interface RenderNameDescOptions {
-  theme: Theme
+  readonly theme: Theme
 }
 
 export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNameDescOptions) {
@@ -215,8 +215,8 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
 }
 
 export interface RenderHeaderDescOptions {
-  name: string;
-  theme: Theme;
+  readonly name: string;
+  readonly theme: Theme;
 }
 
 export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: RenderHeaderDescOptions) {
