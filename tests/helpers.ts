@@ -286,7 +286,6 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   descBoxElem.appendChild(descElem1);
   descBoxElem.appendChild(descElem2);
 
-
   const subtitle = document.createElement('div');
   subtitle.style.background = theme.subtitleBackground;
   subtitle.style.border = theme.subtitleBorder;
