@@ -3,7 +3,8 @@ import {
   type Theme,
   baseUrl,
   exists,
-  renderHeaderDesc
+  renderHeaderDesc,
+  renderWithImage
 } from './helpers';
 
 const studiums = [
@@ -27,11 +28,14 @@ const theme: Theme = {
 
 test('スタジアム取得', async ({ page }) => {
   for (const [name, url] of studiums) {
-    const path = `outputs/${name}.png`;
-    if (await exists(path)) continue;
+    const pathSubtitle = `outputs/字幕のみ/${name}.png`;
+    const pathBox = `outputs/フルサイズ/${name}.png`;
+    if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="スタジアム"]');
     await header.evaluate(renderHeaderDesc, { name, theme });
-    await page.locator('#box').screenshot({ path, omitBackground: true });
+    await page.locator('#subtitle').screenshot({ path: pathSubtitle, omitBackground: true });
+    await page.locator('.RightBox-inner').evaluate(renderWithImage);
+    await page.locator('#box').screenshot({ path: pathBox, omitBackground: true });
   }
 });

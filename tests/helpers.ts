@@ -287,6 +287,7 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   descBoxElem.appendChild(descElem2);
 
   const subtitle = document.createElement('div');
+  subtitle.id = 'subtitle';
   subtitle.style.background = theme.subtitleBackground;
   subtitle.style.border = theme.subtitleBorder;
   subtitle.style.padding = theme.subtitlePadding;
@@ -296,18 +297,24 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   subtitle.appendChild(headerBoxElem);
   subtitle.appendChild(descBoxElem);
 
-  const image = document.querySelector('.LeftBox > img:first-child')
-  if (!(image instanceof HTMLImageElement)) throw new Error();
-  image.width = 200;
-  image.style.marginRight = '-100px';
+  parentNode.append(subtitle);
+}
+
+export function renderWithImage(parentNode: HTMLElement) {
+  const imageElem = document.querySelector('.LeftBox > img:first-child')
+  if (!(imageElem instanceof HTMLImageElement)) throw new Error();
+  imageElem.width = 200;
+  imageElem.style.marginRight = '-100px';
+
+  const subtitleElem = document.getElementById('subtitle');
+  if (!subtitleElem) throw new Error();
 
   const box = document.createElement('div');
   box.id = 'box';
   box.style.background = 'transparent';
   box.style.display = 'inline-block';
   box.style.width = '600px';
-  box.appendChild(image);
-  box.appendChild(subtitle);
-
+  box.appendChild(imageElem);
+  box.appendChild(subtitleElem);
   parentNode.append(box);
 }
