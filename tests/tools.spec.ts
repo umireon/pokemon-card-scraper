@@ -16,11 +16,11 @@ const tools = [
 const theme: Theme = {
   color: 'rgb(255, 255, 255)',
   subtitleBackground: 'rgb(50, 50, 50, 0.6)',
-  subtitleBorder: 'thick ridge rgb(30, 30, 30, 0.8)',
+  subtitleBorder: 'thick ridge rgb(112, 78, 155, 0.8)',
   subtitlePadding: '3px 5px',
-  nameInnerTextStroke: '3px red',
+  nameInnerTextStroke: '5px rgb(112, 78, 155)',
   nameOuterTextStroke: '8px rgb(255, 255, 255)',
-  descInnerTextStroke: '2px red',
+  descInnerTextStroke: '3px rgb(112, 78, 155)',
   descOuterTextStroke: '6px rgb(255, 255, 255)',
 };
 
