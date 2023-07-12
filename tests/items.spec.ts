@@ -26,11 +26,11 @@ const items = [
 const theme: Theme = {
   color: 'rgb(255, 255, 255)',
   subtitleBackground: 'rgb(50, 50, 50, 0.6)',
-  subtitleBorder: 'thick ridge rgb(30, 30, 30, 0.8)',
+  subtitleBorder: 'thick ridge rgb(0, 99, 181, 0.8)',
   subtitlePadding: '3px 5px',
-  nameInnerTextStroke: '3px red',
-  nameOuterTextStroke: '8px rgb(255, 255, 255)',
-  descInnerTextStroke: '2px red',
+  nameInnerTextStroke: '5px rgb(0, 99, 181)',
+  nameOuterTextStroke: '7px rgb(255, 255, 255)',
+  descInnerTextStroke: '3px rgb(0, 99, 181)',
   descOuterTextStroke: '6px rgb(255, 255, 255)',
 };
 
