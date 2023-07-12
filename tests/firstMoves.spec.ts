@@ -3,7 +3,7 @@ import {
   type Theme,
   baseUrl,
   exists,
-  renderSimpleNameDesc
+  renderFirstNameDesc
 } from './helpers';
 
 const firstMoves = [
@@ -31,7 +31,7 @@ test('1番目のワザ取得', async ({ page }) => {
     if (await exists(path)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="ワザ"]');
-    header.evaluate(renderSimpleNameDesc, { theme });
+    await header.evaluate(renderFirstNameDesc, { theme });
     await page.locator('#box').screenshot({ path });
   }
 });

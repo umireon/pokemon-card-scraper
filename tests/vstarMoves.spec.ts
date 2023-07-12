@@ -3,7 +3,7 @@ import {
   type Theme,
   baseUrl,
   exists,
-  renderSimpleNameDesc
+  renderFirstNameDesc
 } from './helpers';
 
 const vstarMoves = [
@@ -27,7 +27,7 @@ test('VSTARパワーのワザ取得', async ({ page }) => {
     if (await exists(path)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h4[text()="ワザ"]');
-    header.evaluate(renderSimpleNameDesc, { theme });
+    await header.evaluate(renderFirstNameDesc, { theme });
     await page.locator('#box').screenshot({ path });
   }
 });
