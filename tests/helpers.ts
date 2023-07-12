@@ -30,10 +30,10 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   const { parentNode } = headerElem
   if (!parentNode) throw new Error();
 
-  document.body.style.background = 'rgb(255, 255, 255, 0)';
+  document.body.style.background = 'transparent';
   const wrapperElem = document.querySelector('.WrapperArea')
   if (!wrapperElem || !(wrapperElem instanceof HTMLElement)) throw new Error();
-  wrapperElem.style.background = 'rgb(255, 255, 255, 0)';
+  wrapperElem.style.background = 'transparent';
 
   const nameElem = headerElem.nextElementSibling;
   if (!nameElem || !(nameElem instanceof HTMLElement)) throw new Error();
@@ -50,6 +50,7 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   nameElem1.style.position = 'absolute';
   nameElem1.style.top = '0';
   nameElem1.style.left = '0';
+  nameElem1.style.width = '100%';
   nameElem1.style.zIndex = '-1';
 
   const nameElem2 = nameElem.cloneNode(true);
@@ -58,6 +59,7 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   nameElem2.style.position = 'absolute';
   nameElem2.style.top = '0';
   nameElem2.style.left = '0';
+  nameElem2.style.width = '100%';
   nameElem2.style.zIndex = '-2';
 
   const nameBoxElem = document.createElement('div');
@@ -73,6 +75,7 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   descElem1.style.position = 'absolute';
   descElem1.style.top = '0';
   descElem1.style.left = '0';
+  descElem1.style.width = '100%';
   descElem1.style.zIndex = '-1';
 
   const descElem2 = descElem.cloneNode(true);
@@ -81,6 +84,7 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   descElem2.style.position = 'absolute';
   descElem2.style.top = '0';
   descElem2.style.left = '0';
+  descElem2.style.width = '100%';
   descElem2.style.zIndex = '-2';
 
   const descBoxElem = document.createElement('div');
@@ -90,13 +94,29 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   descBoxElem.appendChild(descElem1);
   descBoxElem.appendChild(descElem2);
 
+  const subtitle = document.createElement('div');
+  subtitle.style.background = theme.background;
+  subtitle.style.border = theme.border;
+  subtitle.style.padding = theme.padding;
+  subtitle.style.display = 'inline-block';
+  subtitle.style.width = '400px';
+  subtitle.style.boxSizing = 'border-box';
+  subtitle.appendChild(nameBoxElem);
+  subtitle.appendChild(descBoxElem);
+
+  const image = document.querySelector('.LeftBox > img:first-child')
+  if (!(image instanceof HTMLImageElement)) throw new Error();
+  image.width = 200;
+  image.style.marginRight = '-100px';
+
   const box = document.createElement('div');
   box.id = 'box';
-  box.style.background = theme.background;
-  box.style.border = theme.border;
-  box.style.padding = theme.padding;
-  box.appendChild(nameBoxElem);
-  box.appendChild(descBoxElem);
+  box.style.background = 'transparent';
+  box.style.display = 'inline-block';
+  box.style.width = '600px';
+  box.appendChild(image);
+  box.appendChild(subtitle);
+
   parentNode.append(box);
 }
 
@@ -124,6 +144,7 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   nameElem1.style.position = 'absolute';
   nameElem1.style.top = '0';
   nameElem1.style.left = '0';
+  nameElem1.style.width = '100%';
   nameElem1.style.zIndex = '-1';
 
   const nameElem2 = nameElem.cloneNode(true);
@@ -132,6 +153,7 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   nameElem2.style.position = 'absolute';
   nameElem2.style.top = '0';
   nameElem2.style.left = '0';
+  nameElem2.style.width = '100%';
   nameElem2.style.zIndex = '-2';
 
   const nameBoxElem = document.createElement('div');
@@ -147,6 +169,7 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   descElem1.style.position = 'absolute';
   descElem1.style.top = '0';
   descElem1.style.left = '0';
+  descElem1.style.width = '100%';
   descElem1.style.zIndex = '-1';
 
   const descElem2 = descElem.cloneNode(true);
@@ -155,6 +178,7 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   descElem2.style.position = 'absolute';
   descElem2.style.top = '0';
   descElem2.style.left = '0';
+  descElem2.style.width = '100%';
   descElem2.style.zIndex = '-2';
 
   const descBoxElem = document.createElement('div');
@@ -201,7 +225,8 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   headerElem1.style.webkitTextStroke = theme.nameInnerTextStroke;
   headerElem1.style.position = 'absolute';
   headerElem1.style.top = '0';
-  headerElem1.style.left = '5';
+  headerElem1.style.left = '0';
+  headerElem1.style.width = '100%';
   headerElem1.style.zIndex = '-1';
 
   const headerElem2 = headerElem.cloneNode(true);
@@ -210,6 +235,7 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   headerElem2.style.position = 'absolute';
   headerElem2.style.top = '0';
   headerElem2.style.left = '0';
+  headerElem2.style.width = '100%';
   headerElem2.style.zIndex = '-2';
 
   const headerBoxElem = document.createElement('div');
@@ -224,7 +250,8 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   descElem1.style.webkitTextStroke = theme.descInnerTextStroke;
   descElem1.style.position = 'absolute';
   descElem1.style.top = '0';
-  descElem1.style.left = '5';
+  descElem1.style.left = '0';
+  descElem1.style.width = '100%';
   descElem1.style.zIndex = '-1';
 
   const descElem2 = descElem.cloneNode(true);
@@ -233,6 +260,7 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   descElem2.style.position = 'absolute';
   descElem2.style.top = '0';
   descElem2.style.left = '0';
+  descElem2.style.width = '100%';
   descElem2.style.zIndex = '-2';
 
   const descBoxElem = document.createElement('div');

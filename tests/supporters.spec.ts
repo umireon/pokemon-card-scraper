@@ -31,6 +31,6 @@ test('サポート取得', async ({ page }) => {
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="サポート"]');
     await header.evaluate(renderHeaderDesc, { name, theme });
-    await page.locator('#box').screenshot({ path, omitBackground: true, type: 'png' });
+    await page.locator('#box').screenshot({ path, omitBackground: true });
   }
 });

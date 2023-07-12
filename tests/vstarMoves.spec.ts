@@ -28,6 +28,6 @@ test('VSTARパワーのワザ取得', async ({ page }) => {
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h4[text()="ワザ"]');
     await header.evaluate(renderFirstNameDesc, { theme });
-    await page.locator('#box').screenshot({ path });
+    await page.locator('#box').screenshot({ path, omitBackground: true });
   }
 });

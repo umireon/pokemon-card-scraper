@@ -33,6 +33,6 @@ test('特性取得', async ({ page }) => {
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="特性"]');
     await header.evaluate(renderFirstNameDesc, { theme });
-    await page.locator('#box').screenshot({ path });
+    await page.locator('#box').screenshot({ path, omitBackground: true });
   }
 });
