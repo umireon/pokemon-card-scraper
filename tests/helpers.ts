@@ -13,9 +13,9 @@ export async function exists(path: string) {
 
 export interface Theme {
   color: string;
-  background: string;
-  border: string;
-  padding: string;
+  subtitleBackground: string;
+  subtitleBorder: string;
+  subtitlePadding: string;
   nameInnerTextStroke: string;
   nameOuterTextStroke: string;
   descInnerTextStroke: string;
@@ -95,9 +95,9 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   descBoxElem.appendChild(descElem2);
 
   const subtitle = document.createElement('div');
-  subtitle.style.background = theme.background;
-  subtitle.style.border = theme.border;
-  subtitle.style.padding = theme.padding;
+  subtitle.style.background = theme.subtitleBackground;
+  subtitle.style.border = theme.subtitleBorder;
+  subtitle.style.padding = theme.subtitlePadding;
   subtitle.style.display = 'inline-block';
   subtitle.style.width = '400px';
   subtitle.style.boxSizing = 'border-box';
@@ -124,10 +124,10 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   const { parentNode } = headerElem
   if (!parentNode) throw new Error();
 
-  document.body.style.background = 'rgb(255, 255, 255, 0)';
+  document.body.style.background = 'transparent';
   const wrapperElem = document.querySelector('.WrapperArea')
   if (!wrapperElem || !(wrapperElem instanceof HTMLElement)) throw new Error();
-  wrapperElem.style.background = 'rgb(255, 255, 255, 0)';
+  wrapperElem.style.background = 'transparent';
 
   const nameElem = headerElem.nextElementSibling?.nextElementSibling?.nextElementSibling;
   if (!nameElem || !(nameElem instanceof HTMLElement)) throw new Error();
@@ -188,13 +188,29 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   descBoxElem.appendChild(descElem1);
   descBoxElem.appendChild(descElem2);
 
+  const subtitle = document.createElement('div');
+  subtitle.style.background = theme.subtitleBackground;
+  subtitle.style.border = theme.subtitleBorder;
+  subtitle.style.padding = theme.subtitlePadding;
+  subtitle.style.display = 'inline-block';
+  subtitle.style.width = '400px';
+  subtitle.style.boxSizing = 'border-box';
+  subtitle.appendChild(nameBoxElem);
+  subtitle.appendChild(descBoxElem);
+
+  const image = document.querySelector('.LeftBox > img:first-child')
+  if (!(image instanceof HTMLImageElement)) throw new Error();
+  image.width = 200;
+  image.style.marginRight = '-100px';
+
   const box = document.createElement('div');
   box.id = 'box';
-  box.style.background = theme.background;
-  box.style.border = theme.border;
-  box.style.padding = theme.padding;
-  box.appendChild(nameBoxElem);
-  box.appendChild(descBoxElem);
+  box.style.background = 'transparent';
+  box.style.display = 'inline-block';
+  box.style.width = '600px';
+  box.appendChild(image);
+  box.appendChild(subtitle);
+
   parentNode.append(box);
 }
 
@@ -207,10 +223,10 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   const { parentNode } = headerElem
   if (!parentNode) throw new Error();
 
-  document.body.style.background = 'rgb(255, 255, 255, 0)';
+  document.body.style.background = 'transparent';
   const wrapperElem = document.querySelector('.WrapperArea')
   if (!wrapperElem || !(wrapperElem instanceof HTMLElement)) throw new Error();
-  wrapperElem.style.background = 'rgb(255, 255, 255, 0)';
+  wrapperElem.style.background = 'transparent';
 
   headerElem.textContent = name;
   headerElem.style.marginTop = '0';
@@ -270,12 +286,29 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
   descBoxElem.appendChild(descElem1);
   descBoxElem.appendChild(descElem2);
 
+
+  const subtitle = document.createElement('div');
+  subtitle.style.background = theme.subtitleBackground;
+  subtitle.style.border = theme.subtitleBorder;
+  subtitle.style.padding = theme.subtitlePadding;
+  subtitle.style.display = 'inline-block';
+  subtitle.style.width = '400px';
+  subtitle.style.boxSizing = 'border-box';
+  subtitle.appendChild(headerBoxElem);
+  subtitle.appendChild(descBoxElem);
+
+  const image = document.querySelector('.LeftBox > img:first-child')
+  if (!(image instanceof HTMLImageElement)) throw new Error();
+  image.width = 200;
+  image.style.marginRight = '-100px';
+
   const box = document.createElement('div');
   box.id = 'box';
-  box.style.background = theme.background;
-  box.style.border = theme.border;
-  box.style.padding = theme.padding;
-  box.appendChild(headerBoxElem);
-  box.appendChild(descBoxElem);
+  box.style.background = 'transparent';
+  box.style.display = 'inline-block';
+  box.style.width = '600px';
+  box.appendChild(image);
+  box.appendChild(subtitle);
+
   parentNode.append(box);
 }

@@ -12,9 +12,9 @@ const vstarMoves = [
 
 const theme: Theme = {
   color: 'rgb(255, 255, 255)',
-  background: 'rgb(50, 50, 50, 0.6)',
-  border: 'thick ridge rgb(30, 30, 30, 0.8)',
-  padding: '3px 5px',
+  subtitleBackground: 'rgb(50, 50, 50, 0.6)',
+  subtitleBorder: 'thick ridge rgb(30, 30, 30, 0.8)',
+  subtitlePadding: '3px 5px',
   nameInnerTextStroke: '3px red',
   nameOuterTextStroke: '8px rgb(255, 255, 255)',
   descInnerTextStroke: '2px red',
