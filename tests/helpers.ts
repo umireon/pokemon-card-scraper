@@ -37,14 +37,14 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme, prefix }: 
   wrapperElem.style.background = 'transparent';
 
   const nameElem = headerElem.nextElementSibling;
-  if (!nameElem || !(nameElem instanceof HTMLElement)) throw new Error();
+  if (!(nameElem instanceof HTMLElement)) throw new Error();
   if (prefix) {
     nameElem.textContent = prefix + nameElem.textContent;
   }
   nameElem.style.marginTop = '0';
   nameElem.style.color = theme.color;
   const descElem = nameElem.nextElementSibling;
-  if (!descElem || !(descElem instanceof HTMLElement)) throw new Error();
+  if (!(descElem instanceof HTMLElement)) throw new Error();
   descElem.style.marginBottom = '0';
   descElem.style.color = theme.color;
 
@@ -122,11 +122,11 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   wrapperElem.style.background = 'transparent';
 
   const nameElem = headerElem.nextElementSibling?.nextElementSibling?.nextElementSibling;
-  if (!nameElem || !(nameElem instanceof HTMLElement)) throw new Error();
+  if (!(nameElem instanceof HTMLElement)) throw new Error();
   nameElem.style.marginTop = '0';
   nameElem.style.color = theme.color;
   const descElem = nameElem.nextElementSibling;
-  if (!descElem || !(descElem instanceof HTMLElement)) throw new Error();
+  if (!(descElem instanceof HTMLElement)) throw new Error();
   descElem.style.marginBottom = '0';
   descElem.style.color = theme.color;
 
@@ -205,7 +205,7 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
 
   document.body.style.background = 'transparent';
   const wrapperElem = document.querySelector('.WrapperArea')
-  if (!wrapperElem || !(wrapperElem instanceof HTMLElement)) throw new Error();
+  if (!(wrapperElem instanceof HTMLElement)) throw new Error();
   wrapperElem.style.background = 'transparent';
 
   headerElem.textContent = name;
