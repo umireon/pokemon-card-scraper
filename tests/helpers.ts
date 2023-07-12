@@ -95,6 +95,7 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   descBoxElem.appendChild(descElem2);
 
   const subtitle = document.createElement('div');
+  subtitle.id = 'subtitle';
   subtitle.style.background = theme.subtitleBackground;
   subtitle.style.border = theme.subtitleBorder;
   subtitle.style.padding = theme.subtitlePadding;
@@ -104,20 +105,7 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme }: RenderNa
   subtitle.appendChild(nameBoxElem);
   subtitle.appendChild(descBoxElem);
 
-  const image = document.querySelector('.LeftBox > img:first-child')
-  if (!(image instanceof HTMLImageElement)) throw new Error();
-  image.width = 200;
-  image.style.marginRight = '-100px';
-
-  const box = document.createElement('div');
-  box.id = 'box';
-  box.style.background = 'transparent';
-  box.style.display = 'inline-block';
-  box.style.width = '600px';
-  box.appendChild(image);
-  box.appendChild(subtitle);
-
-  parentNode.append(box);
+  parentNode.append(subtitle);
 }
 
 export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderNameDescOptions) {
@@ -189,6 +177,7 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   descBoxElem.appendChild(descElem2);
 
   const subtitle = document.createElement('div');
+  subtitle.id = 'subtitle';
   subtitle.style.background = theme.subtitleBackground;
   subtitle.style.border = theme.subtitleBorder;
   subtitle.style.padding = theme.subtitlePadding;
@@ -198,20 +187,7 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
   subtitle.appendChild(nameBoxElem);
   subtitle.appendChild(descBoxElem);
 
-  const image = document.querySelector('.LeftBox > img:first-child')
-  if (!(image instanceof HTMLImageElement)) throw new Error();
-  image.width = 200;
-  image.style.marginRight = '-100px';
-
-  const box = document.createElement('div');
-  box.id = 'box';
-  box.style.background = 'transparent';
-  box.style.display = 'inline-block';
-  box.style.width = '600px';
-  box.appendChild(image);
-  box.appendChild(subtitle);
-
-  parentNode.append(box);
+  parentNode.append(subtitle);
 }
 
 export interface RenderHeaderDescOptions {

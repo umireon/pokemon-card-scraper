@@ -3,7 +3,8 @@ import {
   type Theme,
   baseUrl,
   exists,
-  renderFirstNameDesc
+  renderFirstNameDesc,
+  renderWithImage
 } from './helpers';
 
 const firstMoves = [
@@ -27,11 +28,14 @@ const theme: Theme = {
 
 test('1番目のワザ取得', async ({ page }) => {
   for (const [name, url] of firstMoves) {
-    const path = `outputs/${name}.png`;
-    if (await exists(path)) continue;
+    const pathSubtitle = `outputs/字幕のみ/${name}.png`;
+    const pathBox = `outputs/フルサイズ/${name}.png`;
+    if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="ワザ"]');
     await header.evaluate(renderFirstNameDesc, { theme });
-    await page.locator('#box').screenshot({ path, omitBackground: true });
+    await page.locator('#subtitle').screenshot({ path: pathSubtitle, omitBackground: true });
+    await page.locator('.RightBox-inner').evaluate(renderWithImage);
+    await page.locator('#box').screenshot({ path: pathBox, omitBackground: true });
   }
 });
