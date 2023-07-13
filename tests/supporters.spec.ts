@@ -27,8 +27,8 @@ const theme: Theme = {
 
 test('サポート取得', async ({ page }) => {
   for (const [name, url] of supporters) {
-    const pathSubtitle = `outputs/字幕のみ/${name}.png`;
-    const pathBox = `outputs/フルサイズ/${name}.png`;
+    const pathSubtitle = `素材/字幕のみ/${name}.png`;
+    const pathBox = `素材/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="サポート"]');
