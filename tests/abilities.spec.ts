@@ -8,15 +8,15 @@ import {
 } from './helpers';
 
 const abilities = [
+  ['イキリテイク', 'card/43272/regu/XY'],
   ['かくしふだ', 'card/41212/regu/XY'],
   ['きょくていおん', 'card/43234/regu/XY'],
   ['しっこくのわざわい', 'card/43164/regu/XY'],
   ['ねっけつレッスン', 'card/42283/regu/XY'],
+  ['はたらくまえば', 'card/40984/regu/XY'],
+  ['はなえらび', 'card/41853/regu/XY'],
   ['ルミナスサイン', 'card/42794/regu/XY'],
   ['わななくれいき', 'card/43235/regu/XY'],
-  ['イキリテイク', 'card/43272/regu/all'],
-  ['はなえらび', 'card/41853/regu/all'],
-  ['はたらくまえば', 'card/40984/regu/all'],
 ];
 
 const theme: Theme = {

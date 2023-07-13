@@ -8,8 +8,8 @@ import {
 } from './helpers';
 
 const secondMoves = [
-  ['ひきさく160', 'card/42371/regu/XY'],
   ['ダイミラクル130', 'card/42315/regu/XY'],
+  ['ひきさく160', 'card/42371/regu/XY'],
   ['ロストマイン', 'card/41848/regu/XY'],
 ];
 

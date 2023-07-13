@@ -9,13 +9,13 @@ import {
 
 const firstMoves = [
   ['アビスシーク', 'card/42371/regu/XY'],
+  ['おとぼけスピット110', 'card/41837/regu/XY'],
   ['クロスフュージョン', 'card/42315/regu/XY'],
   ['テクノバスター210', 'card/42363/regu/XY'],
+  ['トリニティチャージ', 'card/40985/regu/XY'],
+  ['トリニティノヴァ', 'card/42388/regu/XY'],
   ['ひっかく20', 'card/41848/regu/XY'],
   ['ヘイルブレード60x', 'card/43235/regu/XY'],
-  ['おとぼけスピット110', 'card/41837/regu/all'],
-  ['トリニティチャージ', 'card/40985/regu/all'],
-  ['トリニティノヴァ', 'card/42388/regu/XY'],
   ['ロストインパクト', 'card/41885/regu/XY'],
 ];
 
