@@ -25,8 +25,8 @@ const theme: Theme = {
 
 test('VSTARパワーの特性取得', async ({ page }) => {
   for (const [name, url] of vstarAbilities) {
-    const pathSubtitle = `素材/字幕のみ/${name}.png`;
-    const pathBox = `素材/フルサイズ/${name}.png`;
+    const pathSubtitle = `カードテキスト/字幕のみ/${name}.png`;
+    const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h4[text()="特性"]');

@@ -21,6 +21,8 @@ const items = [
   ['ふしぎなアメ', 'card/43822/regu/XY'],
   ['ポケモンいれかえ', 'card/43824/regu/XY'],
   ['ミラージュゲート', 'card/42402/regu/XY'],
+  ['いれかえカート', 'card/41421/regu/all'],
+  ['すごいつりざお', 'card/43273/regu/all'],
 ];
 
 const theme: Theme = {
@@ -36,8 +38,8 @@ const theme: Theme = {
 
 test('グッズ取得', async ({ page }) => {
   for (const [name, url] of items) {
-    const pathSubtitle = `素材/字幕のみ/${name}.png`;
-    const pathBox = `素材/フルサイズ/${name}.png`;
+    const pathSubtitle = `カードテキスト/字幕のみ/${name}.png`;
+    const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="グッズ"]');

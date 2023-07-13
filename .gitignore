@@ -2,7 +2,7 @@ node_modules/
 /test-results/
 /playwright-report/
 /playwright/.cache/
-素材/
+カードテキスト/
 
 # General
 .DS_Store

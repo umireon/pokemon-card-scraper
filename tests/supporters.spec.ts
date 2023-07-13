@@ -12,6 +12,7 @@ const supporters = [
   ['ジャッジマン', 'card/43832/regu/XY'],
   ['ナンジャモ', 'card/43205/regu/XY'],
   ['ボスの指令', 'card/43840/regu/XY'],
+  ['チェレンの気くばり', 'card/40996/regu/XY'],
 ];
 
 const theme: Theme = {
@@ -27,8 +28,8 @@ const theme: Theme = {
 
 test('サポート取得', async ({ page }) => {
   for (const [name, url] of supporters) {
-    const pathSubtitle = `素材/字幕のみ/${name}.png`;
-    const pathBox = `素材/フルサイズ/${name}.png`;
+    const pathSubtitle = `カードテキスト/字幕のみ/${name}.png`;
+    const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="サポート"]');

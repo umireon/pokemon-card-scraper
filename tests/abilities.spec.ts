@@ -14,6 +14,9 @@ const abilities = [
   ['ねっけつレッスン', 'card/42283/regu/XY'],
   ['ルミナスサイン', 'card/42794/regu/XY'],
   ['わななくれいき', 'card/43235/regu/XY'],
+  ['イキリテイク', 'card/43272/regu/all'],
+  ['はなえらび', 'card/41853/regu/all'],
+  ['はたらくまえば', 'card/40984/regu/all'],
 ];
 
 const theme: Theme = {
@@ -29,8 +32,8 @@ const theme: Theme = {
 
 test('特性取得', async ({ page }) => {
   for (const [name, url] of abilities) {
-    const pathSubtitle = `素材/字幕のみ/${name}.png`;
-    const pathBox = `素材/フルサイズ/${name}.png`;
+    const pathSubtitle = `カードテキスト/字幕のみ/${name}.png`;
+    const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="特性"]');

@@ -13,6 +13,10 @@ const firstMoves = [
   ['テクノバスター210', 'card/42363/regu/XY'],
   ['ひっかく20', 'card/41848/regu/XY'],
   ['ヘイルブレード60x', 'card/43235/regu/XY'],
+  ['おとぼけスピット110', 'card/41837/regu/all'],
+  ['トリニティチャージ', 'card/40985/regu/all'],
+  ['トリニティノヴァ', 'card/42388/regu/XY'],
+  ['ロストインパクト', 'card/41885/regu/XY'],
 ];
 
 const theme: Theme = {
@@ -28,8 +32,8 @@ const theme: Theme = {
 
 test('1番目のワザ取得', async ({ page }) => {
   for (const [name, url] of firstMoves) {
-    const pathSubtitle = `素材/字幕のみ/${name}.png`;
-    const pathBox = `素材/フルサイズ/${name}.png`;
+    const pathSubtitle = `カードテキスト/字幕のみ/${name}.png`;
+    const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
     const header = page.locator('//h2[text()="ワザ"]');
