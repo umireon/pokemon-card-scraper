@@ -1,7 +1,6 @@
 import { test } from '@playwright/test';
 import {
   type Theme,
-  addPrefix,
   baseUrl,
   exists,
   getOutputPaths,
