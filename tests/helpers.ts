@@ -287,6 +287,7 @@ export function renderWithImage(parentNode: HTMLElement) {
   const imageElem = document.querySelector('.LeftBox > img:first-child')
   if (!(imageElem instanceof HTMLImageElement)) throw new Error();
   imageElem.width = 200;
+  imageElem.style.borderRadius = '12px';
   imageElem.style.marginRight = '-100px';
 
   const subtitleElem = document.getElementById('subtitle');
