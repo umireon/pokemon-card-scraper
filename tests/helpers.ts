@@ -11,20 +11,21 @@ export async function exists(path: string) {
   }
 }
 
-export interface Theme {
-  readonly color: string;
-  readonly subtitleBackground: string;
-  readonly subtitleBorder: string;
-  readonly subtitlePadding: string;
-  readonly nameInnerTextStroke: string;
-  readonly nameOuterTextStroke: string;
-  readonly descInnerTextStroke: string;
-  readonly descOuterTextStroke: string;
-}
-
 export interface RenderNameDescOptions {
   readonly theme: Theme
   readonly prefix?: string
+}
+
+interface GetOutputPathsResult {
+  readonly pathBox: string
+  readonly pathSubtitle: string
+}
+
+export function getOutputPaths(name: string): GetOutputPathsResult {
+  return {
+    pathBox: `カードテキスト/画像つき/${name}.png`,
+    pathSubtitle: `カードテキスト/字幕のみ/${name}.png`,
+  }
 }
 
 export function resetStyle(wrapperElem: HTMLElement) {
@@ -32,264 +33,126 @@ export function resetStyle(wrapperElem: HTMLElement) {
   wrapperElem.style.background = 'transparent';
 }
 
-export function renderFirstNameDesc(headerElem: HTMLElement, { theme, prefix }: RenderNameDescOptions) {
-  const { parentNode } = headerElem
-  if (!parentNode) throw new Error();
+interface AddPrefixArg {
+  readonly prefix: string
+}
 
-  const nameElem = headerElem.nextElementSibling;
-  if (!(nameElem instanceof HTMLElement)) throw new Error();
-  if (prefix) {
-    nameElem.textContent = prefix + nameElem.textContent;
-  }
-  nameElem.style.marginTop = '0';
-  nameElem.style.color = theme.color;
-  const descElem = nameElem.nextElementSibling;
-  if (!(descElem instanceof HTMLElement)) throw new Error();
-  descElem.style.marginBottom = '0';
-  descElem.style.color = theme.color;
+export function addPrefix(elem: HTMLElement, { prefix }: AddPrefixArg) {
+  elem.textContent = prefix + elem.textContent;
+}
 
-  const nameElem1 = nameElem.cloneNode(true);
-  if (!(nameElem1 instanceof HTMLElement)) throw new Error();
-  nameElem1.style.webkitTextStroke = theme.nameInnerTextStroke;
-  nameElem1.style.position = 'absolute';
-  nameElem1.style.top = '0';
-  nameElem1.style.left = '0';
-  nameElem1.style.width = '100%';
-  nameElem1.style.zIndex = '-1';
+export interface CreateTitleArg {
+  readonly id: string
+  readonly name: string
+}
 
-  const nameElem2 = nameElem.cloneNode(true);
-  if (!(nameElem2 instanceof HTMLElement)) throw new Error();
-  nameElem2.style.webkitTextStroke = theme.nameOuterTextStroke;
-  nameElem2.style.position = 'absolute';
-  nameElem2.style.top = '0';
-  nameElem2.style.left = '0';
-  nameElem2.style.width = '100%';
-  nameElem2.style.zIndex = '-2';
+export function createTitle(parentElem: HTMLElement, { id, name }: CreateTitleArg) {
+  const elem = document.createElement('h4');
+  elem.id = id;
+  elem.textContent = name;
+  parentElem.append(elem);
+  return elem;
+}
 
-  const nameBoxElem = document.createElement('div');
-  nameBoxElem.style.position = 'relative';
-  nameBoxElem.style.zIndex = '0';
-  nameBoxElem.appendChild(nameElem);
-  nameBoxElem.appendChild(nameElem1);
-  nameBoxElem.appendChild(nameElem2);
+export interface RenderStrokeArg {
+  readonly id: string
+  readonly color: string
+  readonly innerStroke: string
+  readonly outerStroke: string
+}
 
-  const descElem1 = descElem.cloneNode(true);
-  if (!(descElem1 instanceof HTMLElement)) throw new Error();
-  descElem1.style.webkitTextStroke = theme.descInnerTextStroke;
-  descElem1.style.position = 'absolute';
-  descElem1.style.top = '0';
-  descElem1.style.left = '0';
-  descElem1.style.width = '100%';
-  descElem1.style.zIndex = '-1';
+export function renderStroke(elem: HTMLElement, { id, color, innerStroke, outerStroke }: RenderStrokeArg): HTMLElement {
+  elem.style.marginBottom = '0';
+  elem.style.color = color;
 
-  const descElem2 = descElem.cloneNode(true);
-  if (!(descElem2 instanceof HTMLElement)) throw new Error();
-  descElem2.style.webkitTextStroke = theme.descOuterTextStroke;
-  descElem2.style.position = 'absolute';
-  descElem2.style.top = '0';
-  descElem2.style.left = '0';
-  descElem2.style.width = '100%';
-  descElem2.style.zIndex = '-2';
+  const innerElem = elem.cloneNode(true);
+  if (!(innerElem instanceof HTMLElement)) throw new Error('The provided node is not HTMLElement!');
+  innerElem.style.webkitTextStroke = innerStroke;
+  innerElem.style.position = 'absolute';
+  innerElem.style.top = '0';
+  innerElem.style.left = '0';
+  innerElem.style.width = '100%';
+  innerElem.style.zIndex = '-1';
 
-  const descBoxElem = document.createElement('div');
-  descBoxElem.style.position = 'relative';
-  descBoxElem.style.zIndex = '0';
-  descBoxElem.appendChild(descElem);
-  descBoxElem.appendChild(descElem1);
-  descBoxElem.appendChild(descElem2);
+  const outerElem = elem.cloneNode(true);
+  if (!(outerElem instanceof HTMLElement)) throw new Error('The provided node is not HTMLElement!');
+  outerElem.style.webkitTextStroke = outerStroke;
+  outerElem.style.position = 'absolute';
+  outerElem.style.top = '0';
+  outerElem.style.left = '0';
+  outerElem.style.width = '100%';
+  outerElem.style.zIndex = '-2';
 
+  const containerElem = document.createElement('div');
+  containerElem.id = id;
+  containerElem.style.position = 'relative';
+  containerElem.style.zIndex = '0';
+  containerElem.appendChild(elem);
+  containerElem.appendChild(innerElem);
+  containerElem.appendChild(outerElem);
+
+  return containerElem;
+}
+
+export interface RenderSubtitleArg {
+  readonly titleElem: HTMLElement
+  readonly descElem: HTMLElement
+  readonly background: string
+  readonly border: string
+  readonly padding: string
+  readonly id: string
+  readonly width: string
+}
+
+export async function renderSubtitle(parentElem: HTMLElement, { descElem, titleElem, background, border, padding, id, width }: RenderSubtitleArg): HTMLElement {
   const subtitle = document.createElement('div');
-  subtitle.id = 'subtitle';
+  subtitle.id = id;
   subtitle.style.marginTop = '1em';
-  subtitle.style.background = theme.subtitleBackground;
-  subtitle.style.border = theme.subtitleBorder;
-  subtitle.style.padding = theme.subtitlePadding;
+  subtitle.style.background = background;
+  subtitle.style.border = border;
+  subtitle.style.padding = padding;
   subtitle.style.display = 'inline-block';
-  subtitle.style.width = '400px';
-  subtitle.style.boxSizing = 'border-box';
-  subtitle.appendChild(nameBoxElem);
-  subtitle.appendChild(descBoxElem);
+  subtitle.style.width = width;
+  subtitle.style.boxSizing = 'border-withImageElem';
+  subtitle.appendChild(titleElem);
+  subtitle.appendChild(descElem);
 
-  parentNode.append(subtitle);
+  parentElem.append(subtitle);
+
+  return subtitle;
 }
 
-export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderNameDescOptions) {
-  const { parentNode } = headerElem
-  if (!parentNode) throw new Error();
-
-  const nameElem = headerElem.nextElementSibling?.nextElementSibling?.nextElementSibling;
-  if (!(nameElem instanceof HTMLElement)) throw new Error();
-  nameElem.style.marginTop = '0';
-  nameElem.style.color = theme.color;
-  const descElem = nameElem.nextElementSibling;
-  if (!(descElem instanceof HTMLElement)) throw new Error();
-  descElem.style.marginBottom = '0';
-  descElem.style.color = theme.color;
-
-  const nameElem1 = nameElem.cloneNode(true);
-  if (!(nameElem1 instanceof HTMLElement)) throw new Error();
-  nameElem1.style.webkitTextStroke = theme.nameInnerTextStroke;
-  nameElem1.style.position = 'absolute';
-  nameElem1.style.top = '0';
-  nameElem1.style.left = '0';
-  nameElem1.style.width = '100%';
-  nameElem1.style.zIndex = '-1';
-
-  const nameElem2 = nameElem.cloneNode(true);
-  if (!(nameElem2 instanceof HTMLElement)) throw new Error();
-  nameElem2.style.webkitTextStroke = theme.nameOuterTextStroke;
-  nameElem2.style.position = 'absolute';
-  nameElem2.style.top = '0';
-  nameElem2.style.left = '0';
-  nameElem2.style.width = '100%';
-  nameElem2.style.zIndex = '-2';
-
-  const nameBoxElem = document.createElement('div');
-  nameBoxElem.style.position = 'relative';
-  nameBoxElem.style.zIndex = '0';
-  nameBoxElem.appendChild(nameElem);
-  nameBoxElem.appendChild(nameElem1);
-  nameBoxElem.appendChild(nameElem2);
-
-  const descElem1 = descElem.cloneNode(true);
-  if (!(descElem1 instanceof HTMLElement)) throw new Error();
-  descElem1.style.webkitTextStroke = theme.descInnerTextStroke;
-  descElem1.style.position = 'absolute';
-  descElem1.style.top = '0';
-  descElem1.style.left = '0';
-  descElem1.style.width = '100%';
-  descElem1.style.zIndex = '-1';
-
-  const descElem2 = descElem.cloneNode(true);
-  if (!(descElem2 instanceof HTMLElement)) throw new Error();
-  descElem2.style.webkitTextStroke = theme.descOuterTextStroke;
-  descElem2.style.position = 'absolute';
-  descElem2.style.top = '0';
-  descElem2.style.left = '0';
-  descElem2.style.width = '100%';
-  descElem2.style.zIndex = '-2';
-
-  const descBoxElem = document.createElement('div');
-  descBoxElem.style.position = 'relative';
-  descBoxElem.style.zIndex = '0';
-  descBoxElem.appendChild(descElem);
-  descBoxElem.appendChild(descElem1);
-  descBoxElem.appendChild(descElem2);
-
-  const subtitle = document.createElement('div');
-  subtitle.id = 'subtitle';
-  subtitle.style.marginTop = '1em';
-  subtitle.style.background = theme.subtitleBackground;
-  subtitle.style.border = theme.subtitleBorder;
-  subtitle.style.padding = theme.subtitlePadding;
-  subtitle.style.display = 'inline-block';
-  subtitle.style.width = '400px';
-  subtitle.style.boxSizing = 'border-box';
-  subtitle.appendChild(nameBoxElem);
-  subtitle.appendChild(descBoxElem);
-
-  parentNode.append(subtitle);
+interface RenderWithImageArg {
+  readonly borderRadius: string
+  readonly id: string
+  readonly imageWidth: number
+  readonly marginRight: string
+  readonly width: string
+  readonly subtitleElem: HTMLElement
+  readonly imageElem: HTMLImageElement
 }
 
-export interface RenderHeaderDescOptions {
-  readonly name: string;
-  readonly theme: Theme;
+export function renderWithImage(parentElem: HTMLElement, { borderRadius, id, imageWidth, marginRight, width, subtitleElem, imageElem }: RenderWithImageArg): HTMLElement {
+  imageElem.width = imageWidth;
+  imageElem.style.borderRadius = borderRadius;
+  imageElem.style.marginRight = marginRight;
+
+  const withImageElem = document.createElement('div');
+  withImageElem.id = id;
+  withImageElem.style.marginTop = '1em';
+  withImageElem.style.background = 'transparent';
+  withImageElem.style.display = 'inline-block';
+  withImageElem.style.width = width;
+  withImageElem.appendChild(imageElem);
+  withImageElem.appendChild(subtitleElem);
+  parentElem.append(withImageElem);
+
+  return withImageElem;
 }
 
-export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: RenderHeaderDescOptions) {
-  const { parentNode } = headerElem
-  if (!parentNode) throw new Error();
-
-  headerElem.textContent = name;
-  headerElem.style.marginTop = '0';
-  headerElem.style.color = theme.color;
-  const descElem = headerElem.nextElementSibling;
-  if (!descElem || !(descElem instanceof HTMLElement)) throw new Error();
-  descElem.style.marginBottom = '0';
-  descElem.style.color = theme.color;
-
-  const headerElem1 = headerElem.cloneNode(true);
-  if (!(headerElem1 instanceof HTMLElement)) throw new Error();
-  headerElem1.style.webkitTextStroke = theme.nameInnerTextStroke;
-  headerElem1.style.position = 'absolute';
-  headerElem1.style.top = '0';
-  headerElem1.style.left = '0';
-  headerElem1.style.width = '100%';
-  headerElem1.style.zIndex = '-1';
-
-  const headerElem2 = headerElem.cloneNode(true);
-  if (!(headerElem2 instanceof HTMLElement)) throw new Error();
-  headerElem2.style.webkitTextStroke = theme.nameOuterTextStroke;
-  headerElem2.style.position = 'absolute';
-  headerElem2.style.top = '0';
-  headerElem2.style.left = '0';
-  headerElem2.style.width = '100%';
-  headerElem2.style.zIndex = '-2';
-
-  const headerBoxElem = document.createElement('div');
-  headerBoxElem.style.position = 'relative';
-  headerBoxElem.style.zIndex = '0';
-  headerBoxElem.appendChild(headerElem);
-  headerBoxElem.appendChild(headerElem1);
-  headerBoxElem.appendChild(headerElem2);
-
-  const descElem1 = descElem.cloneNode(true);
-  if (!(descElem1 instanceof HTMLElement)) throw new Error();
-  descElem1.style.webkitTextStroke = theme.descInnerTextStroke;
-  descElem1.style.position = 'absolute';
-  descElem1.style.top = '0';
-  descElem1.style.left = '0';
-  descElem1.style.width = '100%';
-  descElem1.style.zIndex = '-1';
-
-  const descElem2 = descElem.cloneNode(true);
-  if (!(descElem2 instanceof HTMLElement)) throw new Error();
-  descElem2.style.webkitTextStroke = theme.descOuterTextStroke;
-  descElem2.style.position = 'absolute';
-  descElem2.style.top = '0';
-  descElem2.style.left = '0';
-  descElem2.style.width = '100%';
-  descElem2.style.zIndex = '-2';
-
-  const descBoxElem = document.createElement('div');
-  descBoxElem.style.position = 'relative';
-  descBoxElem.style.zIndex = '0';
-  descBoxElem.appendChild(descElem);
-  descBoxElem.appendChild(descElem1);
-  descBoxElem.appendChild(descElem2);
-
-  const subtitle = document.createElement('div');
-  subtitle.id = 'subtitle';
-  subtitle.style.marginTop = '1em';
-  subtitle.style.background = theme.subtitleBackground;
-  subtitle.style.border = theme.subtitleBorder;
-  subtitle.style.padding = theme.subtitlePadding;
-  subtitle.style.display = 'inline-block';
-  subtitle.style.width = '400px';
-  subtitle.style.boxSizing = 'border-box';
-  subtitle.appendChild(headerBoxElem);
-  subtitle.appendChild(descBoxElem);
-
-  parentNode.append(subtitle);
-}
-
-export function renderWithImage(parentNode: HTMLElement) {
-  const imageElem = document.querySelector('.LeftBox > img:first-child')
-  if (!(imageElem instanceof HTMLImageElement)) throw new Error();
-  imageElem.width = 200;
-  imageElem.style.borderRadius = '12px';
-  imageElem.style.marginRight = '-100px';
-
-  const subtitleElem = document.getElementById('subtitle');
-  if (!subtitleElem) throw new Error();
-
-  const box = document.createElement('div');
-  box.id = 'box';
-  box.style.marginTop = '1em';
-  box.style.background = 'transparent';
-  box.style.display = 'inline-block';
-  box.style.width = '600px';
-  box.appendChild(imageElem);
-  box.appendChild(subtitleElem);
-  parentNode.append(box);
+export interface Theme {
+  readonly withImage: Omit<RenderWithImageArg, 'imageElem' | 'subtitleElem'>
+  readonly subtitle: Omit<RenderSubtitleArg, 'titleElem' | 'descElem'>
+  readonly title: RenderStrokeArg
+  readonly desc: RenderStrokeArg
 }
