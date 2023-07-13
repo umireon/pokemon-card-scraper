@@ -100,6 +100,7 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme, prefix }: 
 
   const subtitle = document.createElement('div');
   subtitle.id = 'subtitle';
+  subtitle.style.marginTop = '1em';
   subtitle.style.background = theme.subtitleBackground;
   subtitle.style.border = theme.subtitleBorder;
   subtitle.style.padding = theme.subtitlePadding;
@@ -182,6 +183,7 @@ export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderN
 
   const subtitle = document.createElement('div');
   subtitle.id = 'subtitle';
+  subtitle.style.marginTop = '1em';
   subtitle.style.background = theme.subtitleBackground;
   subtitle.style.border = theme.subtitleBorder;
   subtitle.style.padding = theme.subtitlePadding;
@@ -268,6 +270,7 @@ export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: Rende
 
   const subtitle = document.createElement('div');
   subtitle.id = 'subtitle';
+  subtitle.style.marginTop = '1em';
   subtitle.style.background = theme.subtitleBackground;
   subtitle.style.border = theme.subtitleBorder;
   subtitle.style.padding = theme.subtitlePadding;
@@ -291,6 +294,7 @@ export function renderWithImage(parentNode: HTMLElement) {
 
   const box = document.createElement('div');
   box.id = 'box';
+  box.style.marginTop = '1em';
   box.style.background = 'transparent';
   box.style.display = 'inline-block';
   box.style.width = '600px';
