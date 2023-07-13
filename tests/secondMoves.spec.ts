@@ -4,7 +4,8 @@ import {
   baseUrl,
   exists,
   renderSecondNameDesc,
-  renderWithImage
+  renderWithImage,
+  resetStyle
 } from './helpers';
 
 const secondMoves = [
@@ -30,6 +31,7 @@ test('2番目のワザ取得', async ({ page }) => {
     const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
+    await page.locator('.WrapperArea').evaluate(resetStyle);
     const header = page.locator('//h2[text()="ワザ"]');
     await header.evaluate(renderSecondNameDesc, { theme });
     await page.locator('#subtitle').screenshot({ path: pathSubtitle, omitBackground: true });

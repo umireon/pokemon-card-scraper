@@ -4,7 +4,8 @@ import {
   baseUrl,
   exists,
   renderFirstNameDesc,
-  renderWithImage
+  renderWithImage,
+  resetStyle
 } from './helpers';
 
 const abilities = [
@@ -36,6 +37,7 @@ test('特性取得', async ({ page }) => {
     const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
+    await page.locator('.WrapperArea').evaluate(resetStyle);
     const header = page.locator('//h2[text()="特性"]');
     await header.evaluate(renderFirstNameDesc, { theme, prefix: '特性：' });
     await page.locator('#subtitle').screenshot({ path: pathSubtitle, omitBackground: true });

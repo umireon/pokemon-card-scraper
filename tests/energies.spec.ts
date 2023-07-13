@@ -4,7 +4,8 @@ import {
   baseUrl,
   exists,
   renderHeaderDesc,
-  renderWithImage
+  renderWithImage,
+  resetStyle
 } from './helpers';
 
 const energies = [
@@ -29,6 +30,7 @@ test('特殊エネルギー取得', async ({ page }) => {
     const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
+    await page.locator('.WrapperArea').evaluate(resetStyle);
     const header = page.locator('//h2[text()="特殊エネルギー"]');
     await header.evaluate(renderHeaderDesc, { name, theme });
     await page.locator('#subtitle').screenshot({ path: pathSubtitle, omitBackground: true });

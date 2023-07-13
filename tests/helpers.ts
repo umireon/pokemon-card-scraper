@@ -27,14 +27,14 @@ export interface RenderNameDescOptions {
   readonly prefix?: string
 }
 
+export function resetStyle(wrapperElem: HTMLElement) {
+  document.body.style.background = 'transparent';
+  wrapperElem.style.background = 'transparent';
+}
+
 export function renderFirstNameDesc(headerElem: HTMLElement, { theme, prefix }: RenderNameDescOptions) {
   const { parentNode } = headerElem
   if (!parentNode) throw new Error();
-
-  document.body.style.background = 'transparent';
-  const wrapperElem = document.querySelector('.WrapperArea')
-  if (!wrapperElem || !(wrapperElem instanceof HTMLElement)) throw new Error();
-  wrapperElem.style.background = 'transparent';
 
   const nameElem = headerElem.nextElementSibling;
   if (!(nameElem instanceof HTMLElement)) throw new Error();
@@ -116,11 +116,6 @@ export function renderFirstNameDesc(headerElem: HTMLElement, { theme, prefix }: 
 export function renderSecondNameDesc(headerElem: HTMLElement, { theme }: RenderNameDescOptions) {
   const { parentNode } = headerElem
   if (!parentNode) throw new Error();
-
-  document.body.style.background = 'transparent';
-  const wrapperElem = document.querySelector('.WrapperArea')
-  if (!wrapperElem || !(wrapperElem instanceof HTMLElement)) throw new Error();
-  wrapperElem.style.background = 'transparent';
 
   const nameElem = headerElem.nextElementSibling?.nextElementSibling?.nextElementSibling;
   if (!(nameElem instanceof HTMLElement)) throw new Error();
@@ -204,11 +199,6 @@ export interface RenderHeaderDescOptions {
 export function renderHeaderDesc(headerElem: HTMLElement, { name, theme }: RenderHeaderDescOptions) {
   const { parentNode } = headerElem
   if (!parentNode) throw new Error();
-
-  document.body.style.background = 'transparent';
-  const wrapperElem = document.querySelector('.WrapperArea')
-  if (!(wrapperElem instanceof HTMLElement)) throw new Error();
-  wrapperElem.style.background = 'transparent';
 
   headerElem.textContent = name;
   headerElem.style.marginTop = '0';

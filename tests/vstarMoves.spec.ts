@@ -4,7 +4,8 @@ import {
   baseUrl,
   exists,
   renderFirstNameDesc,
-  renderWithImage
+  renderWithImage,
+  resetStyle
 } from './helpers';
 
 const vstarMoves = [
@@ -28,6 +29,7 @@ test('VSTARパワーのワザ取得', async ({ page }) => {
     const pathBox = `カードテキスト/フルサイズ/${name}.png`;
     if (await exists(pathSubtitle) && await exists(pathBox)) continue;
     await page.goto(`${baseUrl}/${url}`);
+    await page.locator('.WrapperArea').evaluate(resetStyle);
     const header = page.locator('//h4[text()="ワザ"]');
     await header.evaluate(renderFirstNameDesc, { theme });
     await page.locator('#subtitle').screenshot({ path: pathSubtitle, omitBackground: true });
