@@ -12,6 +12,7 @@ import {
 } from "./helpers";
 
 const energies = [
+  ["Vガードエネルギー", "card/42029/regu/XY"],
   ["ジェットエネルギー", "card/43037/regu/XY"],
   ["ダブルターボエネルギー", "card/42814/regu/XY"],
 ];
