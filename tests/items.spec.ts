@@ -27,6 +27,7 @@ const items = [
   ["ふしぎなアメ", "card/43822/regu/XY"],
   ["ポケモンいれかえ", "card/43824/regu/XY"],
   ["ミラージュゲート", "card/42402/regu/XY"],
+  ["ロストスイーパー", "card/41897/regu/XY"],
 ];
 
 const theme: Theme = {

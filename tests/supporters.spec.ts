@@ -17,6 +17,8 @@ const supporters = [
   ["チェレンの気くばり", "card/40996/regu/XY"],
   ["ナンジャモ", "card/43205/regu/XY"],
   ["ボスの指令", "card/43840/regu/XY"],
+  ["ボスの指令（フラダリ）", "card/38882/regu/XY"],
+  ["ツツジ", "card/41251/regu/XY"],
 ];
 
 const theme: Theme = {
