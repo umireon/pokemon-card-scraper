@@ -12,15 +12,14 @@ import {
 } from "./helpers";
 
 const supporters = [
-  ["アクロマの実験", "card/42409/regu/XY"],
-  ["ジャッジマン", "card/43832/regu/XY"],
-  ["ジャッジマン（SWSH）", "card/42024/regu/XY"],
-  ["チェレンの気くばり", "card/40996/regu/XY"],
-  ["ナンジャモ", "card/43205/regu/XY"],
-  ["ボスの指令", "card/43840/regu/XY"],
-  ["ボスの指令（フラダリ）", "card/38882/regu/XY"],
-  ["ボスの指令（アカギ）", "card/38882/regu/XY"],
-  ["ツツジ", "card/41251/regu/XY"],
+  {
+    card: ["セレナ（上）", "card/42806/regu/XY"],
+    indexes: [0, 2]
+  },
+  {
+    card: ["セレナ（下）", "card/42806/regu/XY"],
+    indexes: [0, 4]
+  }
 ];
 
 const theme: Theme = {
@@ -53,20 +52,28 @@ const theme: Theme = {
 };
 
 test("サポート取得", async ({ page }) => {
-  for (const [filename, url] of supporters) {
-    const { pathBox, pathSubtitle } = getOutputPaths(filename);
+  for (const { card: [name, url], indexes } of supporters) {
+    const { pathBox, pathSubtitle } = getOutputPaths(name);
     if ((await exists(pathSubtitle)) && (await exists(pathBox))) continue;
     await page.goto(`${baseUrl}/${url}`);
     await page.locator(".WrapperArea").evaluate(resetStyle);
     const parent = page.locator(".RightBox-inner");
-    const name = filename.replace(/（.*）/, '');
     await parent.evaluate(createTitle, { id: "title", name });
     const titleHandle = await page
       .locator("#title")
       .evaluateHandle(renderStroke, theme.title);
-    const descHandle = await page
-      .locator('//h2[text()="サポート"]/following-sibling::p[1]')
-      .evaluateHandle(renderStroke, theme.desc);
+    const desc = page
+    .locator('//h2[text()="サポート"]/following-sibling::p[1]');
+    await desc.evaluate((elem, indexes) => {
+      const textNodes = Array.from(elem.childNodes).filter(e => e.nodeType === 3);
+      const desiredTextNodes = indexes.flatMap(i => [
+        textNodes[i],
+        document.createElement('br'),
+        document.createElement('br'),
+      ]).slice(0, -2);
+      elem.replaceChildren(...desiredTextNodes);
+    }, indexes)
+    const descHandle = await desc.evaluateHandle(renderStroke, theme.desc);
     const subtitleHandle = await parent.evaluateHandle(renderSubtitle, {
       ...theme.subtitle,
       titleElem: titleHandle,
