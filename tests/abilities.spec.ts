@@ -21,6 +21,8 @@ const abilities = [
   ["はなえらび", "card/41853/regu/XY"],
   ["ルミナスサイン", "card/42794/regu/XY"],
   ["わななくれいき", "card/43235/regu/XY"],
+  ["なみのヴェール", "card/45293/regu/XY"],
+  ["れんごくしはい", "card/44638/regu/XY"],
 ];
 
 const theme: Theme = {

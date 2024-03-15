@@ -33,6 +33,9 @@ export function resetStyle(wrapperElem: HTMLElement) {
   wrapperElem.style.background = "transparent";
 }
 
+export async function clearRightBox(rightBoxElem: HTMLElement) {
+}
+
 interface AddPrefixArg {
   readonly prefix: string;
 }
@@ -169,13 +172,14 @@ export function renderWithImage(
 
   const withImageElem = document.createElement("div");
   withImageElem.id = id;
-  withImageElem.style.marginTop = "1em";
+  withImageElem.style.marginTop = "100em";
   withImageElem.style.background = "transparent";
   withImageElem.style.display = "inline-block";
   withImageElem.style.width = width;
   withImageElem.appendChild(imageElem);
   withImageElem.appendChild(subtitleElem);
   parentElem.append(withImageElem);
+  withImageElem.style.transform = "scale(1.5)";
 
   return withImageElem;
 }
