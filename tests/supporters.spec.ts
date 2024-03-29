@@ -21,6 +21,8 @@ const supporters = [
   ["ボスの指令（フラダリ）", "card/38882/regu/XY"],
   ["ボスの指令（アカギ）", "card/38882/regu/XY"],
   ["ツツジ", "card/41251/regu/XY"],
+  ["暗号マニアの解読", "card/45284/regu/XY"],
+  ["ペパー", "card/45333/regu/XY"],
 ];
 
 const theme: Theme = {

@@ -14,6 +14,7 @@ import {
 const vstarAbilities = [
   ["スターアルケミー", "card/42184/regu/XY"],
   ["スターバース", "card/42388/regu/XY"],
+  ["スターアルケミー", "card/44058/regu/XY"],
 ];
 
 const theme: Theme = {

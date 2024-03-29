@@ -15,6 +15,7 @@ const tools = [
   ["おはらいグローブ", "card/40291/regu/XY"],
   ["こだわりベルト", "card/42792/regu/XY"],
   ["災いの箱", "card/41585/regu/XY"],
+  ["まけんきハチマキ", "card/44691/regu/XY"],
 ];
 
 const theme: Theme = {
